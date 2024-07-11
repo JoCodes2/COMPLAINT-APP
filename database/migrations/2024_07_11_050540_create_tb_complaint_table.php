@@ -13,16 +13,13 @@ return new class extends Migration
     {
         Schema::create('tb_complaint', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('id_user');
+            $table->foreignUuid('id_user')->constrained('users');
             $table->string('no_complaint');
-            $table->date('complaint_date');
-            $table->enum('complaint_title', ['network', 'kode qr', 'referance number', 'letter line', 'understand use aplication']);
+            $table->foreignUuid('id_category_complaint')->constrained('tb_category_complaint');
             $table->text('desciption_complaint');
-            $table->enum('status_complaint', ['completed', 'not completed']);
+            $table->enum('status_complaint', ['approved', 'rejected']);
+            $table->enum('work_status', ['pending', 'process', 'completed', 'not completed']);
             $table->string('image_complaint')->nullable();
-            $table->timestamps();
-
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
