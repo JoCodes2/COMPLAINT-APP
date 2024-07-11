@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CategoryCompalintModel extends Model
+class CategoryComplaintModel extends Model
 {
     use HasFactory, HasUuids;
-    protected $table = 'tb_category_compalint';
+    protected $table = 'tb_category_complaint';
     protected $fillable = [
         'id',
         'name_category',
