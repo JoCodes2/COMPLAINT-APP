@@ -11,12 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tb_feedback_complaint', function (Blueprint $table) {
+        Schema::create('tb_category_complaint', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('id_complaint');
-            $table->text('desciption_feedback');
-            $table->string('image_feedback')->nullable();
-            $table->foreign('id_complaint')->references('id')->on('tb_complaint')->onDelete('cascade');
+            $table->string('name_category');
             $table->timestamps();
         });
     }
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tb_feedback_complaint');
+        Schema::dropIfExists('tb_category_complaint');
     }
 };
