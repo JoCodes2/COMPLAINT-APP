@@ -13,10 +13,11 @@ class ComplaintModel extends Model
     protected $fillable = [
         'id_user',
         'no_complaint',
-        'complaint_date',
-        'complaint_title',
+        'id_category_complaint',
+        'status_complaint',
         'desciption_complaint',
         'status_complaint',
+        'work_status',
         'image_complaint',
         'created_at',
         'updated_at',
@@ -25,8 +26,8 @@ class ComplaintModel extends Model
     {
         return $this->belongsTo(User::class, 'id_user');
     }
-    public function feedbackComplaint()
+    public function categoryComplaint()
     {
-        return $this->hasOne(FeedbackComplaintModel::class, 'id_complaint');
+        return $this->hasOne(CategoryCompalintModel::class, 'id_category_complaint');
     }
 }
