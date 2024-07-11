@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CMS\UserController;
 use App\Http\Controllers\CMS\CategoryComplaintController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// user
+Route::get('/user', function () {
+    return view('admin.User');
+});
 
 Route::get('/cms-admin', function () {
     return view('Layouts.Base');
@@ -34,4 +40,12 @@ Route::prefix('v1/category-complaint')->controller(CategoryComplaintController::
     Route::get('/get/{id}', 'getDataById');
     Route::post('/update/{id}', 'updateDataById');
     Route::delete('/delete/{id}', 'deleteDataById');
+});
+// route  api user //
+Route::prefix('v1/user')->controller(UserController::class)->group(function () {
+    Route::get('/', 'getAllData');
+    Route::post('/create', 'createData');
+    Route::get('/get/{id}', 'getDataById');
+    Route::post('/update/{id}', 'updateDataById');
+    Route::delete('/delete/{id}', 'deleteData');
 });

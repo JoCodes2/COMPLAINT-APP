@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('nip');
             $table->string('position');
             $table->string('phone');
-            $table->string('username')->unique();
-            $table->string('email')->unique();
+            $table->string('username');
+            $table->string('email');
             $table->string('agency');
             $table->enum('role', ['admin', 'user']);
             $table->string('password');
