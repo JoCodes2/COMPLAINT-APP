@@ -11,10 +11,10 @@
       <div class="collapse navbar-collapse justify-content-end text-center" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item" >
-            <a class="nav-link"  href="">Home</a>
+            <a class="nav-link"  href="/">Home</a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="">Data Pengajuan</a>
+            <a class="nav-link" href="/data-complaint">Data Pengaduan</a>
           </li>
           <li class="nav-item">
             <button class="btn-home font-popins rounded-5 px-4 py-2" id="btnLogout">Logout</button>

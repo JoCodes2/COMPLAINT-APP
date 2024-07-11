@@ -51,10 +51,10 @@
             <h6 class="font-popins sky ">Contact</h6>
             <div>
               <ul class=" list-unstyled justify-content-center text-center ">
-                <li><i class="fa-solid fa-envelope"></i>sipespalupinoreply@gmail.com</a>
+                <li><i class="fa-solid fa-envelope"></i>spspalunoreply@gmail.com</a>
                 </li>
                 <li>
-                    <i class="fas fa-map-marker-alt"></i>Jln.Pue Bongo II
+                    <i class="fas fa-map-marker-alt"></i>Jln.Soekarno-Hatta
                 </li>
               </ul>
             </div>

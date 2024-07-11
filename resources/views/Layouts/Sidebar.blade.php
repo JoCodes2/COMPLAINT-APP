@@ -34,6 +34,12 @@
                         <p>Kategori Pengaduan</p>
                     </a>
                 </li>
+                <li class="nav-item {{ request()->is('cms-complaint*') ? 'active' : '' }}">
+                    <a href="{{ url('/cms-complaint') }}">
+                        <i class="fas fa-list-alt"></i>
+                        <p>Daftar Pengaduan</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

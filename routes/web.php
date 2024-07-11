@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CMS\UserController;
 use App\Http\Controllers\CMS\CategoryComplaintController;
+use App\Http\Controllers\CMS\ComplaintController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,22 +17,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 // user
-Route::get('/user', function () {
-    return view('admin.User');
+Route::get('/', function () {
+    return view('user.home');
 });
+Route::get('/data-complaint', function () {
+    return view('user.dataComplaint');
+});
+
 
 Route::get('/cms-admin', function () {
     return view('Layouts.Base');
 });
-Route::get('/', function () {
-    return view('Layouts.userTemplete');
-});
-
 // category complaint
 Route::get('/cms-category-complaint', function () {
     return view('Admin.CategoryComplaint');
 });
-
+// complaint
+Route::get('/cms-complaint', function () {
+    return view('Admin.Complaint');
+});
 
 // api category complaint
 Route::prefix('v1/category-complaint')->controller(CategoryComplaintController::class)->group(function () {
@@ -47,5 +51,11 @@ Route::prefix('v1/user')->controller(UserController::class)->group(function () {
     Route::post('/create', 'createData');
     Route::get('/get/{id}', 'getDataById');
     Route::post('/update/{id}', 'updateDataById');
+    Route::delete('/delete/{id}', 'deleteData');
+});
+// route  api complaint //
+Route::prefix('v1/complaint')->controller(ComplaintController::class)->group(function () {
+    Route::get('/', 'getAllData');
+    Route::post('/create', 'createData');
     Route::delete('/delete/{id}', 'deleteData');
 });
