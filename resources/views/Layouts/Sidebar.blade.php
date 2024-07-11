@@ -1,4 +1,3 @@
-
 <div class="sidebar sidebar-style-2">
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
@@ -6,7 +5,7 @@
                 <div class="avatar-sm float-left mr-2">
                     <img src="../assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
                 </div>
-                 <div class="info">
+                <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
                             Administrator
@@ -23,6 +22,12 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+                <li class="nav-item {{ request()->is('user*') ? 'active' : '' }}">
+                    <a href="{{ url('/user') }}">
+                        <i class="fas fa-user"></i>
+                        <p>Pengguna</p>
+                    </a>
+                </li>
                 <li class="nav-item {{ request()->is('cms-category-complaint*') ? 'active' : '' }}">
                     <a href="{{ url('/cms-category-complaint') }}">
                         <i class="fas fa-list-alt"></i>
@@ -33,4 +38,3 @@
         </div>
     </div>
 </div>
-
