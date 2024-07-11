@@ -1,6 +1,6 @@
 @extends('Layouts.Base')
 @section('title')
-    Penduduk
+    Pengaduan
 @endsection
 @section('content')
     <div class="page-inner">

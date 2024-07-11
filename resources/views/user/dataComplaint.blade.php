@@ -56,7 +56,7 @@
                             tableBody += "<td>" + item.category_complaint.name_category + "</td>";
                             tableBody += "<td>" + item.desciption_complaint+ "</td>";
                             tableBody += "<td>";
-                                tableBody += "<button type='button' class='btn btn-outline-danger btn-sm reject' data-id='" + item.id + "'><i class='fas fa-trash'></i></button>";
+                                tableBody += "<button type='button' class='btn btn-outline-danger btn-sm delete-data' data-id='" + item.id + "'><i class='fas fa-trash'></i></button>";
                             tableBody += "</td>";
                         tableBody += "</tr>";
                     });
@@ -150,23 +150,22 @@
                 }
             });
         }
-        $(document).on('click', '.delete-confirm', function () {
+        $(document).on('click', '.delete-data', function () {
             let id = $(this).data('id');
 
             // Function to delete data
             function deleteData() {
                 $.ajax({
                     type: 'DELETE',
-                    url: `/v1/permohonan/surat/delete/${id}`,
+                    url: `/v1/complaint/delete/${id}`,
                     success: function (response) {
                         if (response.code === 200) {
                             successAlert();
                             reloadBrowsers();
-                        } else {
-                            errorAlert();
                         }
                     },
                     error: function(xhr, status, error) {
+                        errorAlert();
                         console.error(xhr.responseText);
                     }
                 });

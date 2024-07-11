@@ -23,10 +23,12 @@ Route::get('/', function () {
 Route::get('/data-complaint', function () {
     return view('user.dataComplaint');
 });
-
-
-Route::get('/cms-admin', function () {
-    return view('Layouts.Base');
+// cms admin
+Route::get('/cms-dashboard', function () {
+    return view('Admin.Dashboard');
+});
+Route::get('/cms-user', function () {
+    return view('Admin.User');
 });
 // category complaint
 Route::get('/cms-category-complaint', function () {
@@ -57,5 +59,5 @@ Route::prefix('v1/user')->controller(UserController::class)->group(function () {
 Route::prefix('v1/complaint')->controller(ComplaintController::class)->group(function () {
     Route::get('/', 'getAllData');
     Route::post('/create', 'createData');
-    Route::delete('/delete/{id}', 'deleteData');
+    Route::delete('/delete/{id}', 'deleteDataById');
 });

@@ -16,16 +16,16 @@
                 </div>
             </div>
             <ul class="nav nav-primary">
-                <li class="nav-item">
-                    <a href="">
-                        <i class="fas fa-plus"></i>
-                        <p>Dashboard</p>
+                <li class="nav-item {{ request()->is('cms-dashboard*') ? 'active' : '' }}">
+                    <a href="{{ url('/cms-dashboard') }}">
+                       <i class="fas fa-home"></i>
+                       <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->is('user*') ? 'active' : '' }}">
-                    <a href="{{ url('/user') }}">
-                        <i class="fas fa-user"></i>
-                        <p>Pengguna</p>
+                <li class="nav-item {{ request()->is('cms-complaint*') ? 'active' : '' }}">
+                    <a href="{{ url('/cms-complaint') }}">
+                        <i class="fas fa-list-alt"></i>
+                        <p>Daftar Pengaduan</p>
                     </a>
                 </li>
                 <li class="nav-item {{ request()->is('cms-category-complaint*') ? 'active' : '' }}">
@@ -34,10 +34,10 @@
                         <p>Kategori Pengaduan</p>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->is('cms-complaint*') ? 'active' : '' }}">
-                    <a href="{{ url('/cms-complaint') }}">
-                        <i class="fas fa-list-alt"></i>
-                        <p>Daftar Pengaduan</p>
+                <li class="nav-item {{ request()->is('cms-user*') ? 'active' : '' }}">
+                    <a href="{{ url('/cms-user') }}">
+                        <i class="fas fa-user"></i>
+                        <p>Pengguna</p>
                     </a>
                 </li>
             </ul>

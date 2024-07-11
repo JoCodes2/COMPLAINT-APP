@@ -1,6 +1,6 @@
 @extends('Layouts.Base')
 @section('title')
-    Penduduk
+    Penngguna
 @endsection
 @section('content')
     <div class="page-inner">
@@ -174,13 +174,9 @@
                             tableBody += "<td>" + item.role + "</td>";
                             tableBody +=
                                 "<td>****</td>"; // Menampilkan password yang disembunyikan
-                            tableBody += "<td>";
-                            tableBody +=
-                                "<button type='button' class='btn btn-outline-primary edit-btn' data-id='" +
-                                item.id + "'><i class='fa-solid fa-edit'></i></button> ";
-                            tableBody +=
-                                "<button type='button' class='btn btn-outline-danger delete-confirm' data-id='" +
-                                item.id + "'><i class='fa fa-trash'></i></button>";
+                             tableBody += "<td>";
+                                tableBody += "<button type='button' class='btn btn-outline-primary btn-sm edit-btn' data-id='" + item.id + "'><i class='fas fa-edit'></i></button>";
+                                tableBody += "<button type='button' class='btn btn-outline-danger btn-sm delete-confirm' data-id='" + item.id + "'><i class='fas fa-trash'></i></button>";
                             tableBody += "</td>";
                             tableBody += "</tr>";
                         });
