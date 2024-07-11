@@ -19,7 +19,7 @@ class CategoryComplaintRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_category' => 'required|email',
+            'name_category' => 'required',
         ];
     }
 
