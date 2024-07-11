@@ -28,6 +28,6 @@ class ComplaintModel extends Model
     }
     public function categoryComplaint()
     {
-        return $this->hasOne(CategoryCompalintModel::class, 'id_category_complaint');
+        return $this->belongsTo(CategoryComplaintModel::class, 'id_category_complaint');
     }
 }

@@ -5,26 +5,23 @@
 @section('content')
     <div class="page-inner">
         <div class="page-header ">
-            <h4 class="page-title"><i class="fas fa-list-alt pr-2"></i>Kategori Pengaduan</h4>
+            <h4 class="page-title"><i class="fas fa-list-alt pr-2"></i>Daftar Pengaduan</h4>
         </div>
 
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-end">
-                            <button class="btn btn-primary " id="myBtn">
-                                <i class="fas fa-plus pr-2"></i>Tambah Data
-                            </button>
-                        </div>
-                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="loadData" class="display table table-striped table-hover" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>Nomor Pengaduan</th>
+                                        <th>Dari Nama/Instansi</th>
+                                        <th>Tanggal Dan Waktu</th>
                                         <th>Kategori Pengaduan</th>
+                                        <th>Deskripsi</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -36,42 +33,18 @@
                 </div>
             </div>
         </div>
-        {{-- modal --}}
-        <div class="modal fade" id="upsertDataModal"  role="dialog" aria-labelledby="upsertDataModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl center" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="upsertDataModalLabel"><i class="fas fa-tasks pr-2"></i>Form Data</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="upsertDataForm" method="POST">
-                            @csrf
-                            <input type="hidden" name="id" id="id" >
-                            <div class="form-group" >
-                                <label for="name_category">Ketegory Pengaduan</label>
-                                <input type="text"  class="form-control"  name="name_category" id="name_category" placeholder="input here...."></input>
-                                <small id="name_category-error" class="text-danger"></small>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary"  data-dismiss="modal">Batal</button>
-                        <button type="button" class="btn btn-primary" id="simpanData">Simpan</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 @section('script')
 <script>
     $(document).ready(function () {
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            return new Date(dateString).toLocaleString('id-ID', options);
+        }
         function getData() {
             $.ajax({
-                url: `/v1/category-complaint/`,
+                url: `/v1/complaint/`,
                 method: "GET",
                 dataType: "json",
                 success: function(response) {
@@ -80,10 +53,15 @@
                     $.each(response.data, function(index, item) {
                         tableBody += "<tr>";
                             tableBody += "<td>" + (index + 1) + "</td>";
-                            tableBody += "<td>" + item.name_category + "</td>";
+                            tableBody += "<td>" + item.no_complaint + "</td>";
+                            tableBody += "<td class ='text-center'><strong class ='fw-bold fs-10'>" + item.user.name+ "</strong><br>" + item.user.agency + "</td>";
+                            tableBody += "<td>" + formatDate(item.created_at) + "</td>";
+                            tableBody += "<td>" + item.category_complaint.name_category + "</td>";
+                            tableBody += "<td>" + item.desciption_complaint+ "</td>";
                             tableBody += "<td>";
-                                tableBody += "<button type='button' class='btn btn-outline-primary btn-sm edit-btn' data-id='" + item.id + "'><i class='fas fa-edit'></i></button>";
-                                tableBody += "<button type='button' class='btn btn-outline-danger btn-sm delete-confirm' data-id='" + item.id + "'><i class='fas fa-trash'></i></button>";
+                                tableBody += "<button type='button' class='btn btn-outline-primary btn-sm edit-btn' data-id='" + item.id + "'><i class='fas fa-eye pr-2'></i>Detail</button>";
+                                tableBody += "<button type='button' class='btn btn-outline-success btn-sm approve' data-id='" + item.id + "'><i class='fas fa-check-square'></i></button>";
+                                tableBody += "<button type='button' class='btn btn-outline-danger btn-sm reject' data-id='" + item.id + "'><i class='fas fa-times-circle'></i></button>";
                             tableBody += "</td>";
                         tableBody += "</tr>";
                     });
@@ -176,7 +154,8 @@
                 }
             });
         }
-         // reset modal
+
+        // reset modal
         $('#upsertDataModal').on('hidden.bs.modal', function() {
             $('.text-danger').text('');
             $('#upsertDataForm')[0].reset();
@@ -275,6 +254,7 @@
             // Show confirmation alert
             confirmAlert('Apakah Anda yakin ingin menghapus data?', deleteData);
         });
+
 
 
     });
