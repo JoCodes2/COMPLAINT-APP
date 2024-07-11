@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CMS\CategoryComplaintController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +19,19 @@ Route::get('/cms-admin', function () {
 });
 Route::get('/', function () {
     return view('Layouts.userTemplete');
+});
+
+// category complaint
+Route::get('/cms-category-complaint', function () {
+    return view('Admin.CategoryComplaint');
+});
+
+
+// api category complaint
+Route::prefix('v1/category-complaint')->controller(CategoryComplaintController::class)->group(function () {
+    Route::get('/', 'getAllData');
+    Route::post('/create', 'createData');
+    Route::get('/get/{id}', 'getDataById');
+    Route::post('/update/{id}', 'updateDataById');
+    Route::delete('/delete/{id}', 'deleteDataById');
 });
