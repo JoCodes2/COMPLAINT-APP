@@ -67,7 +67,7 @@ class UserRepositories implements UserInterfaces
             $data = $this->UserModel::findOrFail($id);
 
             // Perbarui data pengguna
-            $data = new $this->UserModel;
+            // $data = new $this->UserModel;
             $data->name = $request->input('name');
             $data->nip = $request->input('nip');
             $data->position = $request->input('position');

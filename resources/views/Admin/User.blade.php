@@ -25,15 +25,15 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama</th>
-                                        <th>NIP</th>
+                                        <th>Nama/NIP</th>
+                                        {{-- <th>NIP</th> --}}
                                         <th>Jabatan</th>
                                         <th>Nomor Telepon</th>
                                         <th>Username</th>
                                         <th>Email</th>
                                         <th>Instansi</th>
-                                        <th>Level</th>
-                                        <th>Password</th>
+                                        {{-- <th>Level</th>
+                                        <th>Password</th> --}}
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -164,16 +164,15 @@
                         $.each(response.data, function(index, item) {
                             tableBody += "<tr>";
                             tableBody += "<td>" + (index + 1) + "</td>";
-                            tableBody += "<td>" + item.name + "</td>";
-                            tableBody += "<td>" + item.nip + "</td>";
+                            tableBody += "<td class ='text-center'><strong class ='fw-bold fs-10'>" + item.name+ "</strong><br>" + item.nip + "</td>";
                             tableBody += "<td>" + item.position + "</td>";
                             tableBody += "<td>" + item.phone + "</td>";
                             tableBody += "<td>" + item.username + "</td>";
                             tableBody += "<td>" + item.email + "</td>";
                             tableBody += "<td>" + item.agency + "</td>";
-                            tableBody += "<td>" + item.role + "</td>";
-                            tableBody +=
-                                "<td>****</td>"; // Menampilkan password yang disembunyikan
+                            // tableBody += "<td>" + item.role + "</td>";
+                            // tableBody +=
+                            //     "<td>****</td>"; // Menampilkan password yang disembunyikan
                              tableBody += "<td>";
                                 tableBody += "<button type='button' class='btn btn-outline-primary btn-sm edit-btn' data-id='" + item.id + "'><i class='fas fa-edit'></i></button>";
                                 tableBody += "<button type='button' class='btn btn-outline-danger btn-sm delete-confirm' data-id='" + item.id + "'><i class='fas fa-trash'></i></button>";
@@ -343,7 +342,6 @@
                         $('#email').val(response.data.email);
                         $('#agency').val(response.data.agency);
                         $('#role').val(response.data.role);
-                        $('#password').val(response.data.password);
                         $('#passwordLabel').text('Masukan password baru')
 
                     },
