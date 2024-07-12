@@ -5,10 +5,12 @@ namespace App\Repositories;
 use App\Http\Requests\ComplaintRequest;
 use App\Interfaces\ComplaintInterfaces;
 use App\Mail\ComplaintMail;
+use App\Mail\ComplaintReviewedNotification;
 use App\Models\CategoryComplaintModel;
 use App\Models\ComplaintModel;
 use App\Models\User;
 use App\Traits\HttpResponseTraits;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
@@ -113,5 +115,25 @@ class ComplaintRepositories implements ComplaintInterfaces
         }
 
         return $this->delete();
+    }
+
+    public function updateStatusComplaint(Request $request, $id)
+    {
+        try {
+            $data = $this->complaintModel::with('categoryComplaint')->find($id);
+
+            if (!$data) {
+                return $this->idOrDataNotFound();
+            }
+
+            $data->status_complaint = 'reviewed';
+            $data->save();
+            // Kirim email notifikasi
+            Mail::to($data->user->email)->send(new ComplaintReviewedNotification($data));
+
+            return $this->success($data);
+        } catch (\Throwable $th) {
+            return $this->error($th->getMessage(), 400, $th, class_basename($this), __FUNCTION__);
+        }
     }
 }

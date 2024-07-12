@@ -5,7 +5,7 @@
 @section('content')
     <div class="page-inner">
         <div class="page-header ">
-            <h4 class="page-title"><i class="fas fa-list-alt pr-2"></i>Pengaduan Belum Ditinjau</h4>
+            <h4 class="page-title"><i class="fas fa-list-alt pr-2"></i>Pengaduan Sudah Ditinjau</h4>
         </div>
 
         <div class="row">
@@ -117,17 +117,16 @@
                     let tableBody = "";
                     let no = 1;
                     $.each(response.data, function(index, item) {
-                        if (item.status_complaint === 'not reviewed') { // Hanya tambahkan data yang belum ditinjau
+                        if (item.status_complaint === 'reviewed') { // Hanya tambahkan data yang belum ditinjau
                             tableBody += "<tr>";
-                                tableBody += "<td>" +  no++ + "</td>";
+                                tableBody += "<td>" + no++ + "</td>";
                                 tableBody += "<td>" + item.no_complaint + "</td>";
                                 tableBody += "<td class ='text-center'><strong class ='fw-bold fs-10'>" + item.user.name + "</strong><br>" + item.user.agency + "</td>";
                                 tableBody += "<td>" + formatDate(item.created_at) + "</td>";
                                 tableBody += "<td>" + item.category_complaint.name_category + "</td>";
-                                 tableBody += "<td>" + item.description_complaint + "</td>";
+                                tableBody += "<td>" + item.description_complaint + "</td>";
                                 tableBody += "<td>";
                                     tableBody += "<button type='button' class='btn btn-outline-primary btn-sm privies-detail' data-id='" + item.id + "'><i class='fas fa-eye pr-2'></i>Detail</button>";
-                                    tableBody += "<button type='button' class='btn btn-outline-success btn-sm btn-riviewed' data-id='" + item.id + "'><i class='fas fa-check-square pr-2'></i>Telah Ditinjau</button>";
                                 tableBody += "</td>";
                             tableBody += "</tr>";
                         }
@@ -148,7 +147,6 @@
                 }
             });
         }
-
         getData();
 
         function getStatus(status_complaint) {
@@ -208,98 +206,6 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-        });
-        // messeage alert
-        // alert success message
-        function successAlert(message) {
-            Swal.fire({
-                title: 'Berhasil!',
-                text: message,
-                icon: 'success',
-                showConfirmButton: false,
-                timer: 1000,
-            })
-        }
-
-        // alert error message
-        function errorAlert() {
-            Swal.fire({
-                title: 'Error',
-                text: 'Terjadi kesalahan!',
-                icon: 'error',
-                showConfirmButton: false,
-                timer: 1000,
-            });
-        }
-
-        function reloadBrowsers() {
-            setTimeout(function() {
-                location.reload();
-            }, 1500);
-        }
-
-
-        function confirmAlert(message, callback) {
-            Swal.fire({
-                title: '<span style="font-size: 22px"> Konfirmasi!</span>',
-                html: message,
-                showCancelButton: true,
-                showConfirmButton: true,
-                cancelButtonText: 'Tidak',
-                confirmButtonText: 'Ya',
-                reverseButtons: true,
-                confirmButtonColor: '#48ABF7',
-                cancelButtonColor: '#EFEFEF',
-                customClass: {
-                    cancelButton: 'text-dark'
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    callback();
-                }
-            });
-        }
-
-        // loading alert
-        function loadingAllert(){
-            Swal.fire({
-                title: 'Loading...',
-                text: 'Please wait',
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            });
-        }
-        $(document).on('click', '.btn-riviewed', function(e) {
-            e.preventDefault();
-
-            let id = $(this).data('id');
-
-            confirmAlert('Anda yakin?', function() {
-                loadingAllert();
-
-                $.ajax({
-                    type: 'POST',
-                    url: `/v1/complaint/review/${id}`,
-                    success: function(response) {
-                        console.log(response);
-                        Swal.close();
-
-                        if (response.code === 200) {
-                            successAlert();
-                            reloadBrowsers();
-                        } else {
-                            errorAlert();
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        Swal.close();
-                        errorAlert();
-                        console.error(xhr.responseText);
-                    }
-                });
-            });
         });
 
     });

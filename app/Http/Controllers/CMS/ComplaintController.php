@@ -30,4 +30,8 @@ class ComplaintController extends Controller
     {
         return $this->complaintRepo->deleteDataById($id);
     }
+    public function updateStatusComplaint(Request $request, $id)
+    {
+        return $this->complaintRepo->updateStatusComplaint($request, $id);
+    }
 }

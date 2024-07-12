@@ -38,7 +38,9 @@ Route::get('/cms-category-complaint', function () {
 Route::get('/cms-complaint', function () {
     return view('Admin.Complaint');
 });
-
+Route::get('/cms-complaint-done', function () {
+    return view('Admin.Riviewed');
+});
 // api category complaint
 Route::prefix('v1/category-complaint')->controller(CategoryComplaintController::class)->group(function () {
     Route::get('/', 'getAllData');
@@ -61,4 +63,5 @@ Route::prefix('v1/complaint')->controller(ComplaintController::class)->group(fun
     Route::get('/get/{id}', 'getDataById');
     Route::post('/create', 'createData');
     Route::delete('/delete/{id}', 'deleteDataById');
+    Route::post('/review/{id}', 'updateStatusComplaint');
 });
