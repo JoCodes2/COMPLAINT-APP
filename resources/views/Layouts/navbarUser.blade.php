@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg font-popins fixed-top">
     <div class="container col-md-10">
       <a class="navbar-brand " href="#">
-        <img src="{{ asset('Image/SIPS.png') }}" alt="Logo" width="100" height="60">
+        <img src="{{ asset('Image/sps.png') }}" alt="Logo" width="100" height="60">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

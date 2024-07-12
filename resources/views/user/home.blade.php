@@ -5,7 +5,7 @@
         <div class="row pt-2 justify-content-center">
           <div class="col-md-5 d-flex justify-content-center align-items-center">
             <div class="bg-home ">
-              <img src="{{ asset('Image/home-user.png') }}" class="img-fluid img" alt="">
+              <img src="{{ asset('Image/home2.png') }}" class="img-fluid img" alt="">
             </div>
           </div>
           <div class="col-md-5 d-flex flex-column justify-content-center align-items-start">
@@ -17,9 +17,10 @@
             <h1 class="title-home font-kanit sky">Selamat Datang di Sistem Informasi Pengaduan Aplikasi SRIKANDI
             </h1>
             <p class="intro-junior font-popins ">
-                Aplikasi ini dibuat untuk mendukung pengembangan aplikasi SRIKANDI.
+                Aplikasi ini dibuat untuk melaporkan pengaduan tentang kekurangan atau kendala dalam menggunakan aplikasi SRIKANDI,
+                 yang dimana aplikasi SRIKANDI sampai saat ini masih dalam proses pengembangan
             </p>
-            <div class="row text-center">
+            {{-- <div class="row text-center">
                 <div class="col-md-4">
                     <div class="card rounded-5">
                         <div class="card-body">
@@ -44,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
       </div>
     </section>
@@ -53,7 +54,7 @@
             <div class="row justify-content-center align-items-center">
                 <div class="col-md-10">
                     <div class="row d-flex justify-content-center align-items-center py-2">
-                        <h1 class="font-kanit sky text-center" data-aos="zoom-in">Anda dapat melakukan pengaduan tentang kekurangan atau kendala dalam menggunakan aplikasi SRIKANDI
+                        <h1 class="font-kanit sky text-center" data-aos="zoom-in">Silahkan mengisi Form dibawah untuk menjelaskan kendala saat menggunakan Aplikasi SRIKANDI
                         </h1>
                     </div>
                     <div class="card rounded-5" data-aos="zoom-in">
