@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pengaduan Baru</title>
+    <title>Pengaduan Ditinjau</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,7 +18,6 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
         .header {
             background-color: #4f5e50;
             color: white;
@@ -27,7 +26,7 @@
             text-align: center;
         }
         .header h1 {
-            color: white;
+            margin: 0;
         }
         .content {
             padding: 20px;
@@ -50,65 +49,42 @@
             padding: 20px;
             border-radius: 0 0 8px 8px;
         }
-        .footer p {
-            margin: 0 0 10px;
-        }
-        .footer a {
-            display: inline-block;
-            padding: 10px 20px;
-            color: white;
-            background-color: #52b3f8;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-        .footer a:hover {
-            background-color: #45a049;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>Hallo, ada pengaduan baru nih!</h1>
+            <h1>Pengaduan Ditinjau</h1>
         </div>
         <div class="content">
-            <h2>Pengaduan Baru Dari :</h2>
+            <p>Pengaduan anda dengan informasi:</p>
             <table>
                 <tr>
-                    <td>Nama</td>
-                    <td>:</td>
-                    <td>{{ $user_name }}</td>
-                </tr>
-                <tr>
-                    <td>Asal Instansi</td>
-                    <td>:</td>
-                    <td>{{ $user_agency }}</td>
-                </tr>
-                <tr>
-                    <td>No Pengaduan</td>
+                    <td>Nomor Pengaduan</td>
                     <td>:</td>
                     <td>{{ $no_complaint }}</td>
                 </tr>
                 <tr>
                     <td>Tanggal Pengaduan</td>
                     <td>:</td>
-                    <td>{{ $created_at }}</td>
+                    <td>{{ $tanggal_complaint }}</td>
                 </tr>
                 <tr>
-                    <td>Kategori Pengaduan</td>
+                    <td>Kategori</td>
                     <td>:</td>
                     <td>{{ $category }}</td>
                 </tr>
                 <tr>
-                    <td>Deskripsi Pengaduan</td>
+                    <td>Deskripsi</td>
                     <td>:</td>
-                  <td>{{ strip_tags($description_complaint) }}</td>
+                   <td>{{ strip_tags($description_complaint) }}</td>
                 </tr>
             </table>
         </div>
         <div class="footer">
-            <a href="{{ url('/cms-dashboard') }}">Tinjau Pengaduan</a>
-            <p style="color: #f4f4f4">Sistem Pengaduan Aplikasi SRIKANDI.</p>
+            <p>Sudah kami tinjau. Terima kasih sudah memberikan informasi untuk perbaikan mengenai kendala dan kekurangan dalam aplikasi SRIKANDI.</p>
+            <p>Kami akan segera memperbaiki kendala yang anda alami.</p>
+            <p>Hormat kami,<br>Terima kasih sudah menggunakan layanan kami.</p>
         </div>
     </div>
 </body>

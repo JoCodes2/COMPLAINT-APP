@@ -40,6 +40,10 @@
             const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
             return new Date(dateString).toLocaleString('id-ID', options);
         }
+        function stripHTML(html) {
+            let doc = new DOMParser().parseFromString(html, 'text/html');
+            return doc.body.textContent || "";
+        }
 
         function getStatus(status_complaint) {
             let statusClass = '';
@@ -70,17 +74,22 @@
                 success: function(response) {
                     console.log(response);
                     let tableBody = "";
+                    let no = 1;
                     $.each(response.data, function(index, item) {
                         tableBody += "<tr>";
-                            tableBody += "<td>" + (index + 1) + "</td>";
+                            tableBody += "<td>" + no++ + "</td>";
                             tableBody += "<td>" + item.no_complaint + "</td>";
                             tableBody += "<td>" + formatDate(item.created_at) + "</td>";
                             tableBody += "<td>" + item.category_complaint.name_category + "</td>";
-                            tableBody += "<td>" + item.description_complaint+ "</td>";
+                            tableBody += "<td>" + item.description_complaint + "</td>";
                             let status = getStatus(item.status_complaint);
                             tableBody += "<td class='text-center'><span class='" + status.statusClass + "'>" + status.statusText + "</span></td>";
                             tableBody += "<td>";
-                                tableBody += "<button type='button' class='btn btn-outline-danger btn-sm delete-data' data-id='" + item.id + "'><i class='fas fa-trash'></i></button>";
+                                if (item.status_complaint === 'not reviewed') {
+                                    tableBody += "<button type='button' class='btn btn-outline-danger btn-sm delete-data' data-id='" + item.id + "'><i class='fas fa-trash'></i></button>";
+                                } else {
+                                    tableBody += "<button type='button' class='btn btn-outline-dark btn-sm delete-data' data-id='" + item.id + "' disabled><i class='fas fa-trash'></i></button>";
+                                }
                             tableBody += "</td>";
                         tableBody += "</tr>";
                     });
@@ -94,14 +103,13 @@
                         info: true,
                         order: []
                     });
-
-
                 },
                 error: function() {
                     console.log("Gagal mengambil data dari server");
                 }
             });
         }
+
 
         getData();
 
