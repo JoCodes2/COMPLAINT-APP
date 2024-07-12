@@ -22,11 +22,31 @@
                        <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->is('cms-complaint*') ? 'active' : '' }}">
-                    <a href="{{ url('/cms-complaint') }}">
-                        <i class="fas fa-list-alt"></i>
+                <li class="nav-item {{ request()->is('cms-complaint*') || request()->is('cms-complaint-action*') || request()->is('cms-complaint-complete*')  ? 'active' : '' }}" aria-expanded="{{ request()->is('cms-complaint*') || request()->is('cms-complaint-action*') || request()->is('cms-complaint-complete*')  ? 'true' : 'false' }}">
+                    <a data-toggle="collapse" href="#sidebarLayouts" class="collapsed ">
+                        <i class="fas fa-list"></i>
                         <p>Daftar Pengaduan</p>
+                        <span class="caret"></span>
                     </a>
+                    <div class="collapse {{ request()->is('cms-complaint*') || request()->is('cms-complaint-action*') || request()->is('cms-complaint-complete*') ? 'show' : '' }}" id="sidebarLayouts" style="">
+                        <ul class="nav nav-collapse">
+                            <li class="nav-item {{ request()->is('cms-complaint*') ? 'active' : '' }}">
+                                <a href="{{ url('/cms-complaint') }}">
+                                    <span class="sub-item">Pengaduan Baru</span>
+                                </a>
+                            </li>
+                            <li class="nav-item {{ request()->is('cms-complaint-action*') ? 'active' : '' }}">
+                                <a href="{{ url('/cms-complaint-action') }}">
+                                    <span class="sub-item">Pengaduan Diproses</span>
+                                </a>
+                            </li>
+                            <li class="nav-item {{ request()->is('cms-complaint-complete*') ? 'active' : '' }}">
+                                <a href="{{ url('/cms-complaint-complete') }}">
+                                    <span class="sub-item">Pengaduan Selesai</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li class="nav-item {{ request()->is('cms-category-complaint*') ? 'active' : '' }}">
                     <a href="{{ url('/cms-category-complaint') }}">

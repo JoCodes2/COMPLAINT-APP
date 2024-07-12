@@ -80,10 +80,10 @@
                                             <small id="id_category_complaint-error" class="text-danger"></small>
                                         </div>
                                         <div class="form-group">
-                                            <label for="desciption_complaint">Deskripsi Pengaduan</label>
-                                            <textarea class="form-control"name="desciption_complaint" id="desciption_complaint" style="display: none;"></textarea>
+                                            <label for="description_complaint">Deskripsi Pengaduan</label>
+                                            <textarea class="form-control"name="description_complaint" id="description_complaint" style="display: none;"></textarea>
                                             <div id="summernote"></div>
-                                            <small id="desciption_complaint-error" class="text-danger"></small>
+                                            <small id="description_complaint-error" class="text-danger"></small>
                                         </div>
                                         <div class="form-group fill">
                                             <label for="image_complaint">Upload File (Jika Ada)</label>
@@ -123,7 +123,7 @@ $('#summernote').summernote({
         placeholder: 'Silahkan isi detail pengaduan anda disini',
         callbacks: {
             onChange: function(contents, $editable) {
-                $('#desciption_complaint').val(contents);
+                $('#description_complaint').val(contents);
             }
         }
     });
@@ -172,7 +172,7 @@ $('#summernote').summernote({
         $('#summernote').summernote('code', placeholderContent);
         $('#id_category_complaint').val('');
         $('#id_user').val('');
-        $('#desciption_complaint').val('');
+        $('#description_complaint').val('');
     });
 
     function successAlert(message) {

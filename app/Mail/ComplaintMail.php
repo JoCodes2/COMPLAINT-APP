@@ -45,7 +45,7 @@ class ComplaintMail extends Mailable
                 'no_complaint' => $this->complaint->no_complaint,
                 'created_at' => $this->complaint->created_at,
                 'category' => $this->categoryName,
-                'description_complaint' => $this->complaint->desciption_complaint,
+                'description_complaint' => $this->complaint->description_complaint,
             ]);
     }
 }

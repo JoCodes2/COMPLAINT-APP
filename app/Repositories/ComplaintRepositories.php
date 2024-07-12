@@ -62,9 +62,8 @@ class ComplaintRepositories implements ComplaintInterfaces
             $data->id_user = $request->input('id_user');
             $data->no_complaint = $this->generateComplaintNumber();
             $data->id_category_complaint = $request->input('id_category_complaint');
-            $data->status_complaint = 'reviewed';
-            $data->desciption_complaint = $request->input('desciption_complaint');
-            $data->work_status = 'pending';
+            $data->status_complaint = 'not reviewed';
+            $data->description_complaint = $request->input('description_complaint');
             $data->created_at = now('Asia/Makassar');
 
             if ($request->hasFile('image_complaint')) {
@@ -89,6 +88,15 @@ class ComplaintRepositories implements ComplaintInterfaces
             return $this->success($data);
         } catch (\Throwable $th) {
             return $this->error($th->getMessage(), 400, $th, class_basename($this), __FUNCTION__);
+        }
+    }
+    public function getDataById($id)
+    {
+        $data = $this->complaintModel::with('user', 'categoryComplaint')->where('id', $id)->first();
+        if (!$data) {
+            return $this->idOrDataNotFound();
+        } else {
+            return $this->success($data);
         }
     }
     public function deleteDataById($id)

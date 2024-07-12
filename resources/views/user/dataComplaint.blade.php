@@ -19,6 +19,7 @@
                                         <th>Tanggal Dan Waktu</th>
                                         <th>Kategori Pengaduan</th>
                                         <th>Deskripsi</th>
+                                        <th>Status Pengaduan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -40,6 +41,27 @@
             return new Date(dateString).toLocaleString('id-ID', options);
         }
 
+        function getStatus(status_complaint) {
+            let statusClass = '';
+            let statusText = '';
+
+            switch (status_complaint) {
+                case 'not reviewed':
+                    statusClass = 'btn btn-dark btn-sm btn-round';
+                    statusText = 'Belum Ditinjau';
+                    break;
+                case 'reviewed':
+                    statusClass = 'btn btn-success btn-sm btn-round';
+                    statusText = 'Ditinjau';
+                    break;
+                default:
+                    statusClass = 'btn btn-primary btn-sm btn-round';
+                    statusText = '-';
+            }
+
+            return { statusClass, statusText };
+        }
+
         function getData() {
             $.ajax({
                 url: `/v1/complaint/`,
@@ -54,7 +76,9 @@
                             tableBody += "<td>" + item.no_complaint + "</td>";
                             tableBody += "<td>" + formatDate(item.created_at) + "</td>";
                             tableBody += "<td>" + item.category_complaint.name_category + "</td>";
-                            tableBody += "<td>" + item.desciption_complaint+ "</td>";
+                            tableBody += "<td>" + item.description_complaint+ "</td>";
+                            let status = getStatus(item.status_complaint);
+                            tableBody += "<td class='text-center'><span class='" + status.statusClass + "'>" + status.statusText + "</span></td>";
                             tableBody += "<td>";
                                 tableBody += "<button type='button' class='btn btn-outline-danger btn-sm delete-data' data-id='" + item.id + "'><i class='fas fa-trash'></i></button>";
                             tableBody += "</td>";
