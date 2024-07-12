@@ -34,6 +34,67 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="detailPengaduanModal" role="dialog" aria-labelledby="detailPengaduanModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl center" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="detailPengaduanModalLabel"><i class="fas fa-tasks pr-2"></i>Detail Pengaduan</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <table class="table table-hover text-nowrap">
+                    <tr>
+                        <td style="width: 50px"><strong>Nama Pengadu</strong></td>
+                        <td style="width: 20px">:</td>
+                        <td><span id="nameComplaint"></span></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50px"><strong>Asal Instansi</strong></td>
+                        <td style="width: 20px">:</td>
+                        <td><span id="agencyComplaint"></span></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50px"><strong>Nomor Pengaduan</strong></td>
+                        <td style="width: 20px">:</td>
+                        <td><span id="noComplaint"></span></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50px"><strong>Tanggal/Waktu Pengaduan</strong></td>
+                        <td style="width: 20px">:</td>
+                        <td><span id="createdAtComplaint"></span></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50px"><strong>Kategory Pengaduan</strong></td>
+                        <td style="width: 20px">:</td>
+                        <td><span id="categoryComplaint"></span></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50px"><strong>Status Pengaduan</strong></td>
+                        <td style="width: 20px">:</td>
+                        <td id="statusComplaint"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50px"><strong>Deskripsi Pengaduan</strong></td>
+                        <td style="width: 20px">:</td>
+                        <td><span id="descriptionComplaint"></span></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50px"><strong>Gambar</strong></td>
+                        <td style="width: 20px">:</td>
+                        <td><span id="imageComplaint" class="img-fluid"></span></td>
+                    </tr>
+                </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('script')
 <script>
@@ -57,9 +118,9 @@
                             tableBody += "<td class ='text-center'><strong class ='fw-bold fs-10'>" + item.user.name+ "</strong><br>" + item.user.agency + "</td>";
                             tableBody += "<td>" + formatDate(item.created_at) + "</td>";
                             tableBody += "<td>" + item.category_complaint.name_category + "</td>";
-                            tableBody += "<td>" + item.desciption_complaint+ "</td>";
+                            tableBody += "<td>" + item.description_complaint+ "</td>";
                             tableBody += "<td>";
-                                tableBody += "<button type='button' class='btn btn-outline-primary btn-sm edit-btn' data-id='" + item.id + "'><i class='fas fa-eye pr-2'></i>Detail</button>";
+                                tableBody += "<button type='button' class='btn btn-outline-primary btn-sm privies-detail' data-id='" + item.id + "'><i class='fas fa-eye pr-2'></i>Detail</button>";
                                 tableBody += "<button type='button' class='btn btn-outline-success btn-sm approve' data-id='" + item.id + "'><i class='fas fa-check-square'></i></button>";
                                 tableBody += "<button type='button' class='btn btn-outline-danger btn-sm reject' data-id='" + item.id + "'><i class='fas fa-times-circle'></i></button>";
                             tableBody += "</td>";
@@ -83,9 +144,60 @@
                 }
             });
         }
-
-
         getData();
+
+        function getStatus(status_complaint) {
+            let statusClass = '';
+            let statusText = '';
+
+            switch (status_complaint) {
+                case 'not reviewed':
+                    statusClass = 'btn btn-dark btn-sm btn-round';
+                    statusText = 'Belum Ditinjau';
+                    break;
+                case 'reviewed':
+                    statusClass = 'btn btn-success btn-sm btn-round';
+                    statusText = 'Ditinjau';
+                    break;
+                default:
+                    statusClass = 'btn btn-primary btn-sm btn-round';
+                    statusText = '-';
+            }
+
+            return { statusClass, statusText };
+        }
+
+        $(document).on('click', '.privies-detail', function() {
+            let complaintId = $(this).data('id');
+            $.ajax({
+                url: `/v1/complaint/get/${complaintId}`,
+                method: "GET",
+                dataType: "json",
+                success: function(response) {
+                    if (response.code === 200) {
+                        let complaint = response.data;
+                        console.log(complaint);
+                        $('#nameComplaint').text(complaint.user.name);
+                        $('#agencyComplaint').text(complaint.user.agency);
+                        $('#noComplaint').text(complaint.no_complaint);
+                        $('#createdAtComplaint').text(formatDate(complaint.created_at));
+                        $('#categoryComplaint').text(complaint.category_complaint.name_category);
+                        $('#descriptionComplaint').text(complaint.description_complaint);
+                        $('#statusComplaint').html('<span class="' + getStatus(complaint.status_complaint).statusClass + '">' + getStatus(complaint.status_complaint).statusText + '</span>');
+
+                        $('#imageComplaint').html(complaint.image_complaint ? '<img src="uploads/file-pengaduan/' + complaint.image_complaint + '" alt="Complaint Image" class="img-fluid">' : 'Tidak ada gambar');
+
+                        // Show the modal
+                        $('#detailPengaduanModal').modal('show');
+                    } else {
+                        console.log('Error fetching complaint details');
+                    }
+                },
+                error: function() {
+                    console.log('Gagal mengambil detail pengaduan');
+                }
+            });
+        });
 
         $.ajaxSetup({
             headers: {

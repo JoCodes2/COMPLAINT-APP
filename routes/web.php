@@ -58,6 +58,7 @@ Route::prefix('v1/user')->controller(UserController::class)->group(function () {
 // route  api complaint //
 Route::prefix('v1/complaint')->controller(ComplaintController::class)->group(function () {
     Route::get('/', 'getAllData');
+    Route::get('/get/{id}', 'getDataById');
     Route::post('/create', 'createData');
     Route::delete('/delete/{id}', 'deleteDataById');
 });

@@ -22,6 +22,10 @@ class ComplaintController extends Controller
     {
         return $this->complaintRepo->createData($request);
     }
+    public function getDataById($id)
+    {
+        return $this->complaintRepo->getDataById($id);
+    }
     public function deleteDataById($id)
     {
         return $this->complaintRepo->deleteDataById($id);

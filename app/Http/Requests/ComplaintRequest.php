@@ -16,7 +16,7 @@ class ComplaintRequest extends FormRequest
     public function rules()
     {
         return [
-            'desciption_complaint' => 'required',
+            'description_complaint' => 'required',
             'id_user' => 'required',
             'id_category_complaint' => 'required',
             'image_complaint' => 'nullable|mimes:jpg,png,jpeg',
@@ -26,7 +26,7 @@ class ComplaintRequest extends FormRequest
     public function messages()
     {
         return [
-            'desciption_complaint.required' => 'Deskripsi keluhan wajib diisi!',
+            'description_complaint.required' => 'Deskripsi keluhan wajib diisi!',
             'id_user.required' => 'User wajib diisi!',
             'id_category_complaint.required' => 'Kategori keluhan wajib diisi!',
             'image_complaint.mimes' => 'File harus pdf,png,jpg,jpeg',

@@ -16,9 +16,8 @@ return new class extends Migration
             $table->foreignUuid('id_user')->constrained('users');
             $table->string('no_complaint');
             $table->foreignUuid('id_category_complaint')->constrained('tb_category_complaint');
-            $table->text('desciption_complaint');
-            $table->enum('status_complaint', ['approved', 'reviewed', 'rejected']);
-            $table->enum('work_status', ['pending', 'process', 'completed', 'not completed']);
+            $table->text('description_complaint');
+            $table->enum('status_complaint', ['reviewed', 'not reviewed']);
             $table->string('image_complaint')->nullable();
             $table->timestamps();
         });
