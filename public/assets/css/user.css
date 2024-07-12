@@ -18,13 +18,13 @@
 }
 /* color */
 .sky {
-    color: #06b6d4;
+    color: #FB6447;
 }
 
 /* navbar */
 .navbar {
     background-color: rgb(255, 255, 255);
-    color: black;
+    color: #054F5C;
 }
 
 .navbar-nav .nav-item {
@@ -38,7 +38,7 @@
 }
 
 .navbar-nav .nav-link:hover {
-    color: #06b6d4;
+    color: #054F5C;
     text-decoration: none;
 }
 
@@ -50,7 +50,7 @@
     transform: translateX(-50%);
     width: 0;
     height: 2px;
-    background-color: #06b6d4;
+    background-color: #054F5C;
     transition: width 0.3s;
 }
 
@@ -64,7 +64,7 @@
 #typing-container {
     white-space: nowrap;
     overflow: hidden;
-    border-right: 0.15em solid #000;
+    border-right: 0.15em solid #054F5C;
     /* Simulasi cursor blinking */
 }
 .title-home {
@@ -88,23 +88,23 @@
 }
 .btn-home {
     background-color: transparent;
-    border: 2px solid #06b6d4;
-    color: #06b6d4;
+    border: 2px solid #054F5C;
+    color: #054F5C;
     transition: opacity 0.5s ease-in-out;
 }
 .btn-home:hover {
     color: white;
-    background-color: #06b6d4;
+    background-color: #054F5C;
 }
 .btn-cencel {
     background-color: transparent;
-    border: 2px solid #696868;
-    color: #696868;
+    border: 2px solid #054F5C;
+    color: #054F5C;
     transition: opacity 0.5s ease-in-out;
 }
 .btn-cencel:hover {
     color: white;
-    background-color: #696868;
+    background-color: #054F5C;
 }
 
 @keyframes moveUpDown {
@@ -151,7 +151,7 @@
 
 /* skils */
 .card-skils {
-    box-shadow: 2px 5px 5px #06b6d4;
+    box-shadow: 2px 5px 5px #054F5C;
     border-radius: 20px;
 }
 .skils-border {
@@ -161,14 +161,14 @@
     transition: box-shadow 0.3s ease-in-out;
 }
 .skils-border:hover {
-    box-shadow: 2px 5px 5px #06b6d4;
+    box-shadow: 2px 5px 5px #054F5C;
 }
 .p-skils {
     transition: box-shadow 0.3s ease-in-out;
     font-style: inherit;
 }
 .p-skils:hover {
-    color: #06b6d4;
+    color: #054F5C;
 }
 
 /* portofolio */
@@ -193,7 +193,7 @@ swiper-slide {
 }
 
 swiper-slide:hover {
-    box-shadow: 0px 4px 6px #06b6d4;
+    box-shadow: 0px 4px 6px #054F5C;
 }
 
 swiper-slide img {
@@ -207,20 +207,20 @@ swiper-slide img {
     background-color: transparent;
     font-size: 12px;
     border: 2px solid #06b6d4;
-    color: #06b6d4;
+    color: #054F5C;
     transition: opacity 0.5s ease-in-out;
 }
 .btn-portofolio:hover {
     color: white;
-    background-color: #06b6d4;
+    background-color: #054F5C;
 }
 
 /* footer */
 a.nav-footer {
-    color: #333; /* Ganti dengan warna teks yang Anda inginkan */
+    color: #054F5C; /* Ganti dengan warna teks yang Anda inginkan */
 }
 #footer {
-    background-color: #f4f4f4;
+    background-color: white;
     margin-top: 50px;
 }
 .col-md-4 a.nav-footer {
@@ -242,6 +242,6 @@ a.nav-footer {
 
 .col-md-4 a.nav-footer:hover::before {
     background-position: 0 0;
-    background: linear-gradient(90deg, transparent 100%, #06b6d4 100%);
+    background: linear-gradient(90deg, transparent 100%, #054F5C 100%);
     transition: background-position 0.3s ease;
 }
