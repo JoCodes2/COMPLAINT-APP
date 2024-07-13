@@ -6,28 +6,34 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ComplaintRequest extends FormRequest
+class AuthRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
     public function authorize(): bool
     {
         return true;
     }
 
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
     public function rules()
     {
         return [
-            'description_complaint' => 'required',
-            'id_category_complaint' => 'required',
-            'image_complaint' => 'nullable|mimes:jpg,png,jpeg',
+            'username' => 'required',
+            'password' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'description_complaint.required' => 'Deskripsi keluhan wajib diisi!',
-            'id_category_complaint.required' => 'Kategori keluhan wajib diisi!',
-            'image_complaint.mimes' => 'File harus berekstendi png,jpg,jpeg',
+            'username.required' => 'Username wajib diisi !',
+            'password.required' => 'Password wajib diisi !',
         ];
     }
 

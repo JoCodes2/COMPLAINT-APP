@@ -11,7 +11,9 @@
           <div class="col-md-5 d-flex flex-column justify-content-center align-items-start">
             <p class="text-hai font-popins">Hallo 👋
                 <span class="sky px-2">
-                   Administrator
+                    @auth
+                        {{ auth()->user()->name }}
+                    @endauth
                 </span>
             </p>
             <h1 class="title-home font-kanit sky">Selamat Datang di Sistem Informasi Pengaduan Aplikasi SRIKANDI
@@ -20,32 +22,6 @@
                 Aplikasi ini dibuat untuk melaporkan pengaduan tentang kekurangan atau kendala dalam menggunakan aplikasi SRIKANDI,
                  yang dimana aplikasi SRIKANDI sampai saat ini masih dalam proses pengembangan
             </p>
-            {{-- <div class="row text-center">
-                <div class="col-md-4">
-                    <div class="card rounded-5">
-                        <div class="card-body">
-                            <h6 class="header-dashboard">Total Permohonan Anda</h6>
-                            <h3 class="card-subtitle  text-muted fw-bold" id="totalRequest"></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card rounded-5">
-                        <div class="card-body">
-                            <h6 class="header-dashboard">Permohonan Dalam Antrian</h6>
-                            <h3 class="card-subtitle  text-muted fw-bold" id="totalPending"></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card rounded-5">
-                        <div class="card-body">
-                            <h6 class="header-dashboard">Total Permohonan Diterima</h6>
-                            <h3 class="card-subtitle  text-muted fw-bold" id="totalApprove"></h3>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
         </div>
       </div>
     </section>
@@ -66,13 +42,6 @@
                                 @csrf
                                 <div class="row ">
                                     <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="id_user">Nama </label>
-                                            <select name="id_user" id="id_user" class="form-control">
-                                                <option value="" selected disabled>--pilih--</option>
-                                            </select>
-                                            <small id="id_user-error" class="text-danger"></small>
-                                        </div>
                                         <div class="form-group">
                                             <label for="id_category_complaint">Kategori Pengaduan</label>
                                             <select name="id_category_complaint" id="id_category_complaint" class="form-control">
@@ -129,23 +98,6 @@ $('#summernote').summernote({
         }
     });
 
-     // Function to populate user dropdown
-    function populateUserDropdown() {
-        $.ajax({
-            url: 'v1/user',
-            method: 'GET',
-            success: function(response) {
-                $('#id_user').empty().append('<option value="" selected disabled>--pilih--</option>');
-                $.each(response.data, function(key, value) {
-                    $('#id_user').append('<option value="' + value.id + '">' + value.name + '</option>');
-                });
-            },
-            error: function(xhr, status, error) {
-                console.log('Error: ' + error);
-            }
-        });
-    }
-
     // Function to populate category complaint dropdown
     function populateCategoryComplaintDropdown() {
         $.ajax({
@@ -162,9 +114,6 @@ $('#summernote').summernote({
             }
         });
     }
-
-    // Call the functions to populate dropdowns
-    populateUserDropdown();
     populateCategoryComplaintDropdown();
 
 
