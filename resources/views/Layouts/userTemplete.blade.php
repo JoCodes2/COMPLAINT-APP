@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/user.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/atlantis.min.css') }}">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -99,7 +99,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-    {{-- <script>
+    <script>
         const urlLogout = 'v1/logout'
         $(document).ready(function() {
             $('#btnLogout').click(function(e) {
@@ -139,7 +139,7 @@
                 });
             });
         });
-    </script> --}}
+    </script>
     @yield('script')
 </body>
 
