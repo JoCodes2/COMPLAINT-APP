@@ -30,7 +30,7 @@ class AuthRepositories implements AuthInterfaces
 
         if (!$now->isBetween($allowedStartTime, $allowedEndTime)) {
             return response()
-                ->json(['message' => 'Login hanya diizinkan dari jam 8 pagi sampai jam 4 sore WITA.'], 401);
+                ->json(['message' => 'Login hanya diizinkan dari jam 8 pagi sampai jam 4 sore WITA.'], 403);
         }
 
         if (!Auth::attempt($request->only('username', 'password'))) {
@@ -47,6 +47,7 @@ class AuthRepositories implements AuthInterfaces
             'token_type' => 'Bearer',
         ]);
     }
+
 
 
     public function logout(Request $request)

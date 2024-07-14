@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
                 "nip" => "1209876543212345",
                 "position" => "Mahasiswa",
                 "phone" => "08123456789",
-                "username" => "adminspspalu",
+                "username" => "admin",
                 "email" => "sipespalupinoreply@gmail.com",
-                "agency" => "Dinas Perpustakaan dan Kearsipan",
+                "agency" => "STIMIK Adhi Guna",
                 "role" => "admin",
                 "password" => Hash::make('12345678')
             ],

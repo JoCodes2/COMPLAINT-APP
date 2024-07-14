@@ -78,29 +78,30 @@
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 1000,
-            })
-        }
-
-        // alert error message
-        function errorAlert() {
-            Swal.fire({
-                title: 'Error',
-                text: 'Terjadi kesalahan!',
-                icon: 'error',
-                showConfirmButton: false,
-                timer: 1000,
             });
         }
 
-
-        // funtion reload
-        function reloadBrowsers() {
-            setTimeout(function() {
-                location.reload();
-            }, 1500);
+        function errorAlert(message) {
+            Swal.fire({
+                title: 'Error',
+                text: message,
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500,
+            });
         }
 
-        function loadingAllert(){
+        function infoAlert(message) {
+            Swal.fire({
+                title: '<span style="font-size: 22px"> Info Penting!</span>',
+                html: message,
+                icon: 'info',
+                showConfirmButton: false,
+                timer: 2000,
+            });
+        }
+
+        function loadingAlert() {
             Swal.fire({
                 title: 'Loading...',
                 text: 'Please wait',
@@ -120,7 +121,7 @@
                 $('.text-danger').text('');
 
                 let formData = new FormData(this);
-                loadingAllert();
+                loadingAlert();
 
                 $.ajax({
                     type: 'POST',
@@ -130,7 +131,7 @@
                     contentType: false,
                     processData: false,
                     success: function (response) {
-                        Swal.close();
+                         Swal.close();
                         if (response.code === 422) {
                             let errors = response.errors;
                             $.each(errors, function(key, value) {
@@ -157,16 +158,19 @@
                         }
                     },
                     error: function(xhr, status, error) {
-                        console.error(xhr.responseText);
                         Swal.close();
+                        const response = xhr.responseJSON;
                         if (xhr.status === 401) {
-                            errorAlert();
+                            errorAlert('Terjadi kesalahan!');
+                        } else if (xhr.status === 403) {
+                            infoAlert('Pelayanan hanya dilakukan dari jam 08:00 sampai 16:00 Wita.');
+                        } else {
+                            console.error(xhr.responseText);
                         }
                     }
                 });
             });
         });
-
     </script>
 </body>
 </html>
