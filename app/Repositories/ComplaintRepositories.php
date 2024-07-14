@@ -11,6 +11,7 @@ use App\Models\ComplaintModel;
 use App\Models\User;
 use App\Traits\HttpResponseTraits;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
@@ -32,8 +33,16 @@ class ComplaintRepositories implements ComplaintInterfaces
     }
     public function getAllData()
     {
-        $data = $this->complaintModel::with('user', 'categoryComplaint')->get();
-        if (!$data) {
+        $user = auth()->user();
+        $role = $user->role;
+        if ($role == 'user') {
+            $data = $this->complaintModel::with('user', 'categoryComplaint')
+                ->where('id_user', $user->id)
+                ->get();
+        } elseif ($role == 'admin') {
+            $data = $this->complaintModel::with('user', 'categoryComplaint')->get();
+        }
+        if ($data->isEmpty()) {
             return $this->dataNotFound();
         } else {
             return $this->success($data);
@@ -60,8 +69,9 @@ class ComplaintRepositories implements ComplaintInterfaces
     public function createData(ComplaintRequest $request)
     {
         try {
+            $user = Auth::user();
             $data = new $this->complaintModel;
-            $data->id_user = $request->input('id_user');
+            $data->id_user = $user->id;
             $data->no_complaint = $this->generateComplaintNumber();
             $data->id_category_complaint = $request->input('id_category_complaint');
             $data->status_complaint = 'not reviewed';

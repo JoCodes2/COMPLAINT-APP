@@ -8,8 +8,13 @@
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
-                            Administrator
-                            <span class="user-level">Admin</span>
+                            @auth
+                                {{ auth()->user()->name }}
+                            @endauth
+                            @auth
+                                <span class="user-level">{{ auth()->user()->agency }}</span>
+                            @endauth
+
                         </span>
                     </a>
                     <div class="clearfix"></div>
