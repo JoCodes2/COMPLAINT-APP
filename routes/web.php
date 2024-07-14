@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CMS\UserController;
 use App\Http\Controllers\CMS\CategoryComplaintController;
 use App\Http\Controllers\CMS\ComplaintController;
+use App\Http\Controllers\CMS\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,10 +28,15 @@ Route::middleware('guest')->group(function () {
     Route::post('/v1/login', [AuthController::class, 'login']);
 });
 
+
+
+
+
 // end route api
 Route::middleware(['web', 'auth'])->group(function () {
     Route::post('/v1/logout', [AuthController::class, 'logout']);
 
+    Route::get('/count-dashboard', [DashboardController::class, 'index'])->middleware('checkRole:admin');
 
     Route::get('/', function () {
         return view('user.home');
