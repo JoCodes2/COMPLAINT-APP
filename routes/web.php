@@ -3,7 +3,7 @@
 use App\Http\Controllers\CMS\UserController;
 use App\Http\Controllers\CMS\CategoryComplaintController;
 use App\Http\Controllers\CMS\ComplaintController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CMS\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +27,7 @@ Route::get('/data-complaint', function () {
     return view('user.dataComplaint');
 });
 // cms admin
-Route::get('/cms-dashboard', [DashboardController::class, 'index']);
+Route::get('/count-dashboard', [DashboardController::class, 'index']);
 Route::get('/cms-dashboard', function () {
     return view('Admin.Dashboard');
 });

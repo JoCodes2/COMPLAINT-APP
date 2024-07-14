@@ -1,18 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\CMS;
 
-use App\Models\Complaint;
+use App\Http\Controllers\Controller;
 use App\Models\ComplaintModel;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function index()
     {
         // Mendapatkan total complaint
