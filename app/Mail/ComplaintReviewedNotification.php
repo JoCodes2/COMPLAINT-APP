@@ -24,7 +24,7 @@ class ComplaintReviewedNotification extends Mailable
                 'no_complaint' => $this->complaint->no_complaint,
                 'tanggal_complaint' => $this->complaint->created_at,
                 'category' => $this->complaint->categoryComplaint->name_category,
-                'description' => $this->complaint->description_complaint,
+                'description_complaint' => $this->complaint->description_complaint,
             ]);
     }
 }

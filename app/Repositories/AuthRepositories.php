@@ -25,8 +25,8 @@ class AuthRepositories implements AuthInterfaces
         // Mendapatkan waktu saat ini dalam zona waktu Indonesia Tengah
         $now = now()->setTimezone('Asia/Makassar');
 
-        $allowedStartTime = $now->copy()->setTime(16, 0, 0);
-        $allowedEndTime = $now->copy()->setTime(24, 0, 0);
+        $allowedStartTime = $now->copy()->setTime(8, 0, 0);
+        $allowedEndTime = $now->copy()->setTime(16, 0, 0);
 
         if (!$now->isBetween($allowedStartTime, $allowedEndTime)) {
             return response()
